@@ -184,7 +184,7 @@ extension HomeViewController: HeaderViewDelegate {
         collectionView.reloadData()
         
         let filteredCount = objectArray.count
-        headerView.dataLabel.text = filteredCount == 0 ? "No results found" : "Showing \(filteredCount) results for '\(text)'"
+        headerView.dataLabel.text = filteredCount == 0 ? "No results found for '\(text)'" : "Showing \(filteredCount) results for '\(text)'"
     }
 }
 
