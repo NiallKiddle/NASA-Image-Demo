@@ -22,6 +22,7 @@ class HomeViewController: UIViewController {
     
     // Private variables
     private var objectArray: [ItemModel] = []
+    private var savedArray: [ItemModel] = [] // Stores items from objectArray for when removing search filter
     private let numberOfCellsPerRow: CGFloat = 1
     private let endPoint = ""
 
@@ -53,6 +54,7 @@ private extension HomeViewController {
     {
         // Header layout
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.openHeight)
+        headerView.delegate = self
         view.addSubview(headerView)
         
         // UICollectionView layout
@@ -158,19 +160,59 @@ extension HomeViewController {
     }
 }
 
-// MARK: - Network
+// MARK: - HeaderViewDelegate implementation
+extension HomeViewController: HeaderViewDelegate {
+    
+    func searchDidUpdate(with text: String)
+    {
+        // Return items to original array
+        objectArray = savedArray
+        
+        guard text != "" else {
+            collectionView.reloadData()
+            
+            headerView.dataLabel.text = "Showing \(savedArray.count) results"
+            return
+        }
+        
+        // Filter for search term
+        let filtered = objectArray.filter {
+            $0.data!.first!.title!.localizedLowercase.contains(text.localizedLowercase)
+        }
+        
+        objectArray = filtered
+        collectionView.reloadData()
+        
+        let filteredCount = objectArray.count
+        headerView.dataLabel.text = filteredCount == 0 ? "No results found" : "Showing \(filteredCount) results for '\(text)'"
+    }
+}
+
+// MARK: - API fetch
 private extension HomeViewController {
     
     func fetchImages()
     {
         guard let url = URL(string: network.endpoint) else { return }
         
+        headerView.dataLabel.text = "Fetching images"
+        
         network.fetchObjects(from: url) { (objects) in
-            guard objects != nil else { return }
-            self.objectArray = objects!
+            guard objects != nil else {
+                
+                // Use main thread for UI Change
+                DispatchQueue.main.async {
+                    self.headerView.dataLabel.text = "Error fetching images"
+                }
+                
+                return
+            }
             
-            // Use main thread for UI Change
+            self.objectArray = objects!
+            self.savedArray = self.objectArray
+            
             DispatchQueue.main.async {
+                self.headerView.dataLabel.text = "Showing \(self.savedArray.count) results"
                 self.collectionView.reloadData()
             }
         }

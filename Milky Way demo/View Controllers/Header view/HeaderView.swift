@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - Delegate
 protocol HeaderViewDelegate {
-    
+    func searchDidUpdate(with text: String)
 }
 
 // MARK: - Header state
@@ -33,11 +33,10 @@ class HeaderView: UIView {
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var textConstraint: NSLayoutConstraint!
+    @IBOutlet weak var dataLabel: UILabel!
     
-    // Private variables
-    private var delegate: HeaderViewDelegate!
+    public var delegate: HeaderViewDelegate!
     
-    // Public variables
     public let closedConstraint: CGFloat = 0
     public let openConstraint: CGFloat = 58
     
@@ -60,14 +59,35 @@ private extension HeaderView {
     
     func setupView()
     {
-        // Search view
         searchView.layer.masksToBounds = true
         searchView.layer.cornerRadius = 12
+        
+        searchTextField.delegate = self
         
         // Shadow
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize.zero
         layer.shadowRadius = 4
+    }
+}
+
+// MARK: - UITextFieldDelegate implementation
+extension HeaderView: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        // Dismiss keyboard on return
+        if searchTextField.isFirstResponder { searchTextField.resignFirstResponder() }
+        return false
+    }
+    
+    @IBAction func textFieldDidChange(_ sender: UITextField)
+    {
+        guard sender.text != nil else { return }
+        guard delegate != nil else { return }
+        
+        // Update search every character change
+        delegate.searchDidUpdate(with: sender.text!)
     }
 }
