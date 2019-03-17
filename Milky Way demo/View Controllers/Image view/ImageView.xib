@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ImageView" customModule="Milky_Way_demo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KYs-1E-4fe">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSz-QB-Jfu">
+                    <rect key="frame" x="162.5" y="597" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="BhQ-ND-39I"/>
+                        <constraint firstAttribute="width" constant="50" id="awd-sb-GUd"/>
+                    </constraints>
+                    <state key="normal" image="Button_Down"/>
+                    <connections>
+                        <action selector="downPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="isB-LS-T3M"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date | Center" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7f2-TX-9ZE">
+                    <rect key="frame" x="20" y="530.5" width="292.5" height="20"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZ4-YL-dER">
+                    <rect key="frame" x="0.0" y="20" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="Bhp-Ia-mfb"/>
+                        <constraint firstAttribute="height" constant="50" id="pys-Ef-BIT"/>
+                    </constraints>
+                    <state key="normal" image="Button_Cancel"/>
+                    <connections>
+                        <action selector="cancelPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="k8u-AJ-kfA"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAe-Pt-jKc">
+                    <rect key="frame" x="20" y="558.5" width="292.5" height="38.5"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
+                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="MZ4-YL-dER" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="2Ef-Rr-ATC"/>
+                <constraint firstItem="KYs-1E-4fe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2IL-PS-CdG"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="GSz-QB-Jfu" secondAttribute="bottom" constant="20" id="88w-SG-IoL"/>
+                <constraint firstAttribute="bottom" secondItem="KYs-1E-4fe" secondAttribute="bottom" id="AZk-vZ-Fuh"/>
+                <constraint firstItem="KYs-1E-4fe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Cz7-h7-fwz"/>
+                <constraint firstAttribute="trailing" secondItem="KYs-1E-4fe" secondAttribute="trailing" id="HWp-wu-Heb"/>
+                <constraint firstItem="tAe-Pt-jKc" firstAttribute="trailing" secondItem="GSz-QB-Jfu" secondAttribute="trailing" constant="100" id="Rdk-3h-b0H"/>
+                <constraint firstItem="GSz-QB-Jfu" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="XCr-vm-0Mm"/>
+                <constraint firstItem="7f2-TX-9ZE" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Yds-NT-fQt"/>
+                <constraint firstItem="GSz-QB-Jfu" firstAttribute="top" secondItem="tAe-Pt-jKc" secondAttribute="bottom" id="ZZ3-jN-y7l"/>
+                <constraint firstItem="MZ4-YL-dER" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="aRG-qS-J1W"/>
+                <constraint firstItem="tAe-Pt-jKc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="b4s-vh-gYE"/>
+                <constraint firstItem="tAe-Pt-jKc" firstAttribute="top" secondItem="7f2-TX-9ZE" secondAttribute="bottom" constant="8" id="gK1-2G-Z67"/>
+                <constraint firstItem="7f2-TX-9ZE" firstAttribute="trailing" secondItem="tAe-Pt-jKc" secondAttribute="trailing" id="ure-BI-aaQ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="backgroundImageView" destination="KYs-1E-4fe" id="K8x-01-3yj"/>
+                <outlet property="subtitleLabel" destination="7f2-TX-9ZE" id="far-EA-HBo"/>
+                <outlet property="titleLabel" destination="tAe-Pt-jKc" id="N9g-Sp-9RG"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="Button_Cancel" width="25" height="25"/>
+        <image name="Button_Down" width="30" height="10"/>
+    </resources>
+</document>
