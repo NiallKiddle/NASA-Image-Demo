@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
     private let headerView = HeaderView.instanceFromNib()
     
     // Private variables
-    private var imageURLArray: [String] = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
+    private var objectArray: [ItemModel] = []
     private let numberOfCellsPerRow: CGFloat = 1
     private let endPoint = ""
 
@@ -51,6 +51,9 @@ private extension HomeViewController {
         collectionView.dataSource = self
         collectionView.register(imageNib, forCellWithReuseIdentifier: "imageCollectionViewCell")
         
+        // Dismiss keyboard when scroll
+        collectionView.keyboardDismissMode = .onDrag
+        
         // Layout UICollectionView for cells per row
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout
         {
@@ -65,12 +68,13 @@ private extension HomeViewController {
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageURLArray != nil ? imageURLArray.count : 0
+        return objectArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-        cell.imageView.backgroundColor = .red
+        cell.imageView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+        cell.configureCell(for: objectArray[indexPath.item])
         return cell
     }
     
@@ -137,6 +141,14 @@ private extension HomeViewController {
     {
         guard let url = URL(string: network.endpoint) else { return }
         
-        
+        network.fetchObjects(from: url) { (objects) in
+            guard objects != nil else { return }
+            self.objectArray = objects!
+            
+            // Use main thread for UI Change
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
 }

@@ -28,22 +28,39 @@
                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKi-BJ-dgd">
-                        <rect key="frame" x="8" y="154" width="327" height="38"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKi-BJ-dgd">
+                        <rect key="frame" x="8" y="153.5" width="327" height="38.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3kR-ph-zxp">
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="228"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="k4G-yY-chE">
+                                <rect key="frame" x="161.5" y="104" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="k4G-yY-chE" firstAttribute="centerX" secondItem="3kR-ph-zxp" secondAttribute="centerX" id="UdV-Mf-wfI"/>
+                            <constraint firstItem="k4G-yY-chE" firstAttribute="centerY" secondItem="3kR-ph-zxp" secondAttribute="centerY" id="w3y-si-Qmi"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="0TW-9E-e1A" firstAttribute="top" secondItem="tKi-BJ-dgd" secondAttribute="bottom" constant="8" id="01C-hH-zRE"/>
+                <constraint firstAttribute="trailing" secondItem="3kR-ph-zxp" secondAttribute="trailing" id="8bY-LK-PWb"/>
                 <constraint firstItem="Ykr-eL-c2z" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="9eD-yf-amV"/>
+                <constraint firstAttribute="bottom" secondItem="3kR-ph-zxp" secondAttribute="bottom" id="Bxs-j5-37U"/>
                 <constraint firstAttribute="bottom" secondItem="0TW-9E-e1A" secondAttribute="bottom" constant="8" id="Cun-AU-4WF"/>
                 <constraint firstAttribute="trailing" secondItem="0TW-9E-e1A" secondAttribute="trailing" constant="8" id="F3B-F3-zDI"/>
                 <constraint firstItem="tKi-BJ-dgd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="I7p-9G-muN"/>
                 <constraint firstAttribute="trailing" secondItem="tKi-BJ-dgd" secondAttribute="trailing" constant="8" id="TcD-gq-l5a"/>
+                <constraint firstItem="3kR-ph-zxp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="du0-LJ-uSO"/>
                 <constraint firstItem="Ykr-eL-c2z" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="i03-Ln-xHH"/>
+                <constraint firstItem="3kR-ph-zxp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="i9Q-9o-BWy"/>
                 <constraint firstAttribute="trailing" secondItem="Ykr-eL-c2z" secondAttribute="trailing" id="rmG-PU-55k"/>
                 <constraint firstAttribute="bottom" secondItem="Ykr-eL-c2z" secondAttribute="bottom" id="tPF-Rb-1CN"/>
                 <constraint firstItem="0TW-9E-e1A" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="xmI-Cd-cNj"/>
