@@ -62,11 +62,6 @@ private extension ImageViewController {
         // Text view
         textView.delegate = self
         textView.configureView(for: objectData)
-        
-        // Data and center label
-        let date = objectData.date_created!
-        let center = objectData.center!
-        textView.subtitleLabel.text = "\(center) | \(date)"
     }
 }
 

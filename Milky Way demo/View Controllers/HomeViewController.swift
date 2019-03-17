@@ -65,7 +65,7 @@ private extension HomeViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(imageNib, forCellWithReuseIdentifier: "imageCollectionViewCell")
-        collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 20, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
         
         // Dismiss keyboard when scroll
         collectionView.keyboardDismissMode = .onDrag

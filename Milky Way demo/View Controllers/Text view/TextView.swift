@@ -17,12 +17,15 @@ class TextView: UIView {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var headerView: UIView!
     
     var delegate: TextViewDelegate!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        headerShadow()
     }
     
     class func instanceFromNib() -> TextView {
@@ -33,7 +36,25 @@ class TextView: UIView {
     open func configureView(for data: DataModel)
     {
         titleLabel.text = data.title!
-        descriptionLabel.text = data.description!
+        descriptionTextView.text = data.description!
+        descriptionTextView.contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        
+        let date = data.date_created!
+        let center = data.center!
+        subtitleLabel.text = "\(center) | \(date)"
+    }
+}
+
+// MARK: - Private functions
+private extension TextView {
+    
+     func headerShadow()
+     {
+        // Shadow
+        headerView.layer.shadowColor = UIColor.black.cgColor
+        headerView.layer.shadowOpacity = 0.5
+        headerView.layer.shadowOffset = CGSize.zero
+        headerView.layer.shadowRadius = 4
     }
 }
 

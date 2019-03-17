@@ -34,7 +34,10 @@ class ImageView: UIView {
     {
         backgroundImageView.image = image
         titleLabel.text = data.title!
-        subtitleLabel.text = data.date_created!
+        
+        let date = data.date_created!
+        let center = data.center!
+        subtitleLabel.text = "\(center) | \(date)"
     }
 }
 

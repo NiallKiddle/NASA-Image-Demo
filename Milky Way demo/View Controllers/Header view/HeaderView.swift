@@ -63,5 +63,11 @@ private extension HeaderView {
         // Search view
         searchView.layer.masksToBounds = true
         searchView.layer.cornerRadius = 12
+        
+        // Shadow
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize.zero
+        layer.shadowRadius = 4
     }
 }
