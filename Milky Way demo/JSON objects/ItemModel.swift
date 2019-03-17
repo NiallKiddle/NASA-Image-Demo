@@ -9,12 +9,8 @@
 import Foundation
 
 // Conform model to Decodable to parse JSON
-struct ImageModel: Decodable {
-    let id: String
-    let title: String
-    let description: String
-    let imageURL: String
-    let center: String
-    let date: String
-    let keywords: [String]
+struct RefModel: Decodable {
+    let href: String?
+    let data: [DataModel]?
+    let links: [LinksModel]?
 }
