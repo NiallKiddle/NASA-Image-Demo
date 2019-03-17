@@ -9,7 +9,7 @@
 import Foundation
 
 // Conform model to Decodable to parse JSON
-struct RefModel: Decodable {
+struct ItemModel: Decodable {
     let href: String?
     let data: [DataModel]?
     let links: [LinksModel]?

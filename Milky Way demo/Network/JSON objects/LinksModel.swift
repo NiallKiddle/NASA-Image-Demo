@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+// Conform model to Decodable to parse JSON
+struct LinksModel: Decodable {
+    let render: String?
+    let rel: String?
+    let href: String?
+}

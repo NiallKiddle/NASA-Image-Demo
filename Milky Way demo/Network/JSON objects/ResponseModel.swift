@@ -8,3 +8,7 @@
 
 import Foundation
 
+// Conform model to Decodable to parse JSON
+struct ResponseModel: Decodable {
+    let collection: CollectionModel?
+}

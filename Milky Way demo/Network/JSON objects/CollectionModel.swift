@@ -9,6 +9,6 @@
 import Foundation
 
 // Conform model to Decodable to parse JSON
-struct ItemModel: Decodable {
-    let items: [RefModel]
+struct CollectionModel: Decodable {
+    let items: [ItemModel]
 }
