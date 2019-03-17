@@ -28,6 +28,14 @@ class ImageView: UIView {
     class func instanceFromNib() -> ImageView {
         return UINib(nibName: "ImageView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ImageView
     }
+    
+    // MARK: - Public functions
+    open func configureView(for data: DataModel, image: UIImage)
+    {
+        backgroundImageView.image = image
+        titleLabel.text = data.title!
+        subtitleLabel.text = data.date_created!
+    }
 }
 
 // MARK: - Actions

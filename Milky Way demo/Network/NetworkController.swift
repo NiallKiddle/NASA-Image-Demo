@@ -45,6 +45,8 @@ class NetworkController {
         }
         
         fetchData(from: url!) { (data) in
+            guard data != nil else { return }
+            
             let imageToCache = UIImage(data: data!)
             
             // Ensure returning correct image

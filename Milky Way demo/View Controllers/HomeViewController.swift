@@ -14,6 +14,9 @@ class HomeViewController: UIViewController {
     
     private let network = NetworkController()
     
+    private var selectedData: DataModel!
+    private var selectedImage: UIImage!
+    
     // Views
     private let headerView = HeaderView.instanceFromNib()
     
@@ -28,6 +31,18 @@ class HomeViewController: UIViewController {
         layoutViews()
         setupCollectionView()
         fetchImages()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueImageVC"
+        {
+            guard let destination = segue.destination as? ImageViewController else { return }
+            guard selectedData != nil && selectedImage != nil else { return }
+            
+            // Prepare next view variables
+            destination.objectData = selectedData
+            destination.objectImage = selectedImage
+        }
     }
 }
 
@@ -81,7 +96,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected")
+        let object = objectArray[indexPath.item]
+        guard let data = object.data?.first! else { return }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell else { return }
+        
+        selectedData = data
+        selectedImage = cell.imageView.image
+        
+        performSegue(withIdentifier: "segueImageVC", sender: self)
     }
 }
 

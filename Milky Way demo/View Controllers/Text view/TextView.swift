@@ -28,6 +28,13 @@ class TextView: UIView {
     class func instanceFromNib() -> TextView {
         return UINib(nibName: "TextView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! TextView
     }
+    
+    // MARK: - Public functions
+    open func configureView(for data: DataModel)
+    {
+        titleLabel.text = data.title!
+        descriptionLabel.text = data.description!
+    }
 }
 
 // MARK: - Actions

@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KYs-1E-4fe">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KYs-1E-4fe">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSz-QB-Jfu">
@@ -26,9 +26,12 @@
                         <constraint firstAttribute="width" constant="50" id="awd-sb-GUd"/>
                     </constraints>
                     <state key="normal" image="Button_Down"/>
+                    <connections>
+                        <action selector="downPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="isB-LS-T3M"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date | Center" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7f2-TX-9ZE">
-                    <rect key="frame" x="20" y="521" width="242.5" height="20"/>
+                    <rect key="frame" x="20" y="530.5" width="292.5" height="20"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -40,10 +43,13 @@
                         <constraint firstAttribute="height" constant="50" id="pys-Ef-BIT"/>
                     </constraints>
                     <state key="normal" image="Button_Cancel"/>
+                    <connections>
+                        <action selector="cancelPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="k8u-AJ-kfA"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAe-Pt-jKc">
-                    <rect key="frame" x="20" y="549" width="242.5" height="48"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
+                    <rect key="frame" x="20" y="558.5" width="292.5" height="38.5"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -56,7 +62,7 @@
                 <constraint firstAttribute="bottom" secondItem="KYs-1E-4fe" secondAttribute="bottom" id="AZk-vZ-Fuh"/>
                 <constraint firstItem="KYs-1E-4fe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Cz7-h7-fwz"/>
                 <constraint firstAttribute="trailing" secondItem="KYs-1E-4fe" secondAttribute="trailing" id="HWp-wu-Heb"/>
-                <constraint firstItem="tAe-Pt-jKc" firstAttribute="trailing" secondItem="GSz-QB-Jfu" secondAttribute="trailing" constant="50" id="Rdk-3h-b0H"/>
+                <constraint firstItem="tAe-Pt-jKc" firstAttribute="trailing" secondItem="GSz-QB-Jfu" secondAttribute="trailing" constant="100" id="Rdk-3h-b0H"/>
                 <constraint firstItem="GSz-QB-Jfu" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="XCr-vm-0Mm"/>
                 <constraint firstItem="7f2-TX-9ZE" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Yds-NT-fQt"/>
                 <constraint firstItem="GSz-QB-Jfu" firstAttribute="top" secondItem="tAe-Pt-jKc" secondAttribute="bottom" id="ZZ3-jN-y7l"/>
@@ -66,6 +72,11 @@
                 <constraint firstItem="7f2-TX-9ZE" firstAttribute="trailing" secondItem="tAe-Pt-jKc" secondAttribute="trailing" id="ure-BI-aaQ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="backgroundImageView" destination="KYs-1E-4fe" id="K8x-01-3yj"/>
+                <outlet property="subtitleLabel" destination="7f2-TX-9ZE" id="far-EA-HBo"/>
+                <outlet property="titleLabel" destination="tAe-Pt-jKc" id="N9g-Sp-9RG"/>
+            </connections>
         </view>
     </objects>
     <resources>
