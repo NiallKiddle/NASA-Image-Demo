@@ -42,6 +42,9 @@ extension ImageCollectionViewCell {
     
     public func configureCell(for object: ItemModel)
     {
+        // Reset indicator and loading view
+        if imageView.image == nil { cellImage(hasLoaded: false) }
+        
         guard let data = object.data?[0] else { return }
         guard let links = object.links?[0] else { return }
         
@@ -57,9 +60,10 @@ extension ImageCollectionViewCell {
         network.loadImageUsing(urlString: links.href!) { (image) in
             guard image != nil else { return }
             
-            // Jump back onto main thread for UI Change
+            // Switch onto main thread for UI Change
             DispatchQueue.main.async {
                 self.imageView.image = image
+                self.cellImage(hasLoaded: true)
             }
         }
     }
@@ -68,9 +72,9 @@ extension ImageCollectionViewCell {
 // MARK: - Private functions
 private extension ImageCollectionViewCell {
     
-    func cellImage(isLoading: Bool)
+    func cellImage(hasLoaded: Bool)
     {
-        guard !isLoading else {
+        guard hasLoaded else {
             // Still loading attributes
             loadingView.alpha = 1
             activityIndicator.startAnimating()
@@ -81,9 +85,9 @@ private extension ImageCollectionViewCell {
         activityIndicator.stopAnimating()
         
         // Gently reveal cell
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut, .allowUserInteraction], animations: {
             self.loadingView.alpha = 0
-        }
+        })
     }
     
     func setupCell()

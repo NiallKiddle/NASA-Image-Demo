@@ -50,6 +50,7 @@ private extension HomeViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(imageNib, forCellWithReuseIdentifier: "imageCollectionViewCell")
+        collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 20, right: 0)
         
         // Dismiss keyboard when scroll
         collectionView.keyboardDismissMode = .onDrag
@@ -59,7 +60,8 @@ private extension HomeViewController {
         {
             let horizontalSpacing = flowLayout.scrollDirection == .vertical ? flowLayout.minimumInteritemSpacing : flowLayout.minimumLineSpacing
             let cellWidth = (collectionView.frame.width - max(0, numberOfCellsPerRow - 1) * horizontalSpacing) / numberOfCellsPerRow
-            flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
+            flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth * 0.8)
+            flowLayout.minimumLineSpacing = 20
         }
     }
 }
