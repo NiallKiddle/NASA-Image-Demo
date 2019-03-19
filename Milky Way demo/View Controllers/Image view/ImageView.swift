@@ -8,18 +8,13 @@
 
 import UIKit
 
-protocol ImageViewDelegate {
-    func imageCancelPressed()
-    func imageDownPressed()
-}
-
 class ImageView: UIView {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var backgroundImageView: UIImageView!
-    
-    var delegate: ImageViewDelegate!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var downButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,27 +27,15 @@ class ImageView: UIView {
     // MARK: - Public functions
     open func configureView(for data: DataModel, image: UIImage)
     {
-        backgroundImageView.image = image
+        // Title label
         titleLabel.text = data.title!
         
+        // Fullscreen image
+        backgroundImageView.image = image
+        
+        // Subtitle label with date and center
         let date = data.date_created!
         let center = data.center!
-        subtitleLabel.text = "\(center) | \(date)"
-    }
-}
-
-// MARK: - Actions
-extension ImageView {
-    
-    @IBAction func cancelPressed(_ sender: UIButton)
-    {
-        guard delegate != nil else { return }
-        delegate.imageCancelPressed()
-    }
-    
-    @IBAction func downPressed(_ sender: UIButton)
-    {
-        guard delegate != nil else { return }
-        delegate.imageDownPressed()
+        subtitleLabel.text = "\(center) | \(date.formattedDateString())"
     }
 }

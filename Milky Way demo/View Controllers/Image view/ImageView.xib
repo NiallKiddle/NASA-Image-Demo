@@ -26,9 +26,6 @@
                         <constraint firstAttribute="width" constant="50" id="awd-sb-GUd"/>
                     </constraints>
                     <state key="normal" image="Button_Down"/>
-                    <connections>
-                        <action selector="downPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="isB-LS-T3M"/>
-                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date | Center" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7f2-TX-9ZE">
                     <rect key="frame" x="20" y="530.5" width="292.5" height="20"/>
@@ -43,9 +40,6 @@
                         <constraint firstAttribute="height" constant="50" id="pys-Ef-BIT"/>
                     </constraints>
                     <state key="normal" image="Button_Cancel"/>
-                    <connections>
-                        <action selector="cancelPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="k8u-AJ-kfA"/>
-                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAe-Pt-jKc">
                     <rect key="frame" x="20" y="558.5" width="292.5" height="38.5"/>
@@ -74,6 +68,8 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="backgroundImageView" destination="KYs-1E-4fe" id="K8x-01-3yj"/>
+                <outlet property="cancelButton" destination="MZ4-YL-dER" id="chH-D0-MfM"/>
+                <outlet property="downButton" destination="GSz-QB-Jfu" id="KsK-Hn-K0J"/>
                 <outlet property="subtitleLabel" destination="7f2-TX-9ZE" id="far-EA-HBo"/>
                 <outlet property="titleLabel" destination="tAe-Pt-jKc" id="N9g-Sp-9RG"/>
             </connections>
