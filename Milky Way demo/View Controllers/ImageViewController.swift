@@ -12,12 +12,13 @@ class ImageViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    // Public variables
+    // Public properties
     public var objectData: DataModel!
     public var objectImage: UIImage!
     
-    // Private variables
+    // Private properties
     private var pagesArray: [UIView] = []
+    private var currentIndex: CGFloat = 0
     
     // Views
     var imageView = ImageView.instanceFromNib()
@@ -56,24 +57,33 @@ private extension ImageViewController {
         guard objectImage != nil else { return }
         
         // Image view
-        imageView.delegate = self
         imageView.configureView(for: objectData, image: objectImage)
+        imageView.downButton.addTarget(self, action: #selector(imageDownPressed(_:)), for: .touchUpInside)
+        imageView.cancelButton.addTarget(self, action: #selector(imageCancelPressed(_:)), for: .touchUpInside)
         
         // Text view
-        textView.delegate = self
         textView.configureView(for: objectData)
+        textView.upButton.addTarget(self, action: #selector(textUpPressed(_:)), for: .touchUpInside)
+        textView.cancelButton.addTarget(self, action: #selector(textCancelPressed(_:)), for: .touchUpInside)
+    }
+    
+    func resetPosition()
+    {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        })
     }
 }
 
-// MARK: - TextViewDelegate Implementation
-extension ImageViewController: TextViewDelegate {
+// MARK: - TextViewDelegate button handlers
+extension ImageViewController {
     
-    func textCancelPressed()
+    @objc func textCancelPressed(_ sender: UIButton)
     {
         dismiss(animated: true, completion: nil)
     }
     
-    func textUpPressed()
+    @objc func textUpPressed(_ sender: UIButton)
     {
         UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut,.allowUserInteraction], animations: {
             self.scrollView.contentOffset = CGPoint(x: 0, y: 0)
@@ -81,18 +91,29 @@ extension ImageViewController: TextViewDelegate {
     }
 }
 
-// MARK: - TextViewDelegate Implementation
-extension ImageViewController: ImageViewDelegate {
+// MARK: - ImageViewDelegate button handlers
+extension ImageViewController {
     
-    func imageCancelPressed()
+    @objc func imageCancelPressed(_ sender: UIButton)
     {
         dismiss(animated: true, completion: nil)
     }
     
-    func imageDownPressed()
+    @objc func imageDownPressed(_ sender: UIButton)
     {
         UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut,.allowUserInteraction], animations: {
             self.scrollView.contentOffset = CGPoint(x: 0, y: self.view.frame.height)
         })
+    }
+}
+
+// MARK: - UIScrollViewDelegate implementation
+extension ImageViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+        // Update current page index
+        let scrollOffset = scrollView.contentOffset.x / scrollView.frame.size.width
+        currentIndex = round(scrollOffset)
     }
 }

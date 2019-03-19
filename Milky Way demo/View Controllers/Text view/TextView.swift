@@ -8,20 +8,15 @@
 
 import UIKit
 
-protocol TextViewDelegate {
-    func textCancelPressed()
-    func textUpPressed()
-}
-
 class TextView: UIView {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var headerView: UIView!
-    
-    var delegate: TextViewDelegate!
-    
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var upButton: UIButton!
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -35,13 +30,28 @@ class TextView: UIView {
     // MARK: - Public functions
     open func configureView(for data: DataModel)
     {
+        // Titlec label
         titleLabel.text = data.title!
-        descriptionTextView.text = data.description!
-        descriptionTextView.contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
+        // Subtitle label with date and center
         let date = data.date_created!
         let center = data.center!
-        subtitleLabel.text = "\(center) | \(date)"
+        subtitleLabel.text = "\(center) | \(date.formattedDateString())"
+        
+        // Inset description content
+        descriptionTextView.contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        
+        // Try to convert description to NSMutableAttributedString
+        guard let attributedString = data.description!.htmlToAttributedString else {
+            descriptionTextView.text = data.description!
+            return
+        }
+        
+        // Use attributed text to display formatted HTML
+        let range = NSRange(location: 0, length: attributedString.length)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: range)
+        attributedString.addAttribute(.font, value: UIFont(name: "HelveticaNeue-Light", size: 17)!, range: range)
+        descriptionTextView.attributedText = attributedString
     }
 }
 
@@ -50,26 +60,10 @@ private extension TextView {
     
      func headerShadow()
      {
-        // Shadow
+        // Header shadow
         headerView.layer.shadowColor = UIColor.black.cgColor
         headerView.layer.shadowOpacity = 0.5
         headerView.layer.shadowOffset = CGSize.zero
         headerView.layer.shadowRadius = 4
-    }
-}
-
-// MARK: - Actions
-extension TextView {
-    
-    @IBAction func cancelPressed(_ sender: UIButton)
-    {
-        guard delegate != nil else { return }
-        delegate.textCancelPressed()
-    }
-    
-    @IBAction func upPressed(_ sender: UIButton)
-    {
-        guard delegate != nil else { return }
-        delegate.textUpPressed()
     }
 }

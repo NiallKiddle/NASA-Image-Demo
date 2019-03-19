@@ -20,7 +20,7 @@ class HomeViewController: UIViewController {
     // Views
     private let headerView = HeaderView.instanceFromNib()
     
-    // Private variables
+    // Private properties
     private var objectArray: [ItemModel] = []
     private var savedArray: [ItemModel] = [] // Stores items from objectArray for when removing search filter
     private let numberOfCellsPerRow: CGFloat = 1
@@ -40,7 +40,7 @@ class HomeViewController: UIViewController {
             guard let destination = segue.destination as? ImageViewController else { return }
             guard selectedData != nil && selectedImage != nil else { return }
             
-            // Prepare next view variables
+            // Prepare next view properties
             destination.objectData = selectedData
             destination.objectImage = selectedImage
         }
@@ -184,7 +184,7 @@ extension HomeViewController: HeaderViewDelegate {
         collectionView.reloadData()
         
         let filteredCount = objectArray.count
-        headerView.dataLabel.text = filteredCount == 0 ? "No results found" : "Showing \(filteredCount) results for '\(text)'"
+        headerView.dataLabel.text = filteredCount == 0 ? "No results found for '\(text)'" : "Showing \(filteredCount) results for '\(text)'"
     }
 }
 
@@ -197,6 +197,7 @@ private extension HomeViewController {
         
         headerView.dataLabel.text = "Fetching images"
         
+        // Make call to API
         network.fetchObjects(from: url) { (objects) in
             guard objects != nil else {
                 

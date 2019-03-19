@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wQP-FZ-M3r">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="157"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="157.5"/>
                     <color key="backgroundColor" red="0.1529411765" green="0.1529411765" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvJ-uJ-8RZ">
@@ -27,9 +27,6 @@
                         <constraint firstAttribute="height" constant="50" id="zhh-PJ-nxe"/>
                     </constraints>
                     <state key="normal" image="Button_Cancel"/>
-                    <connections>
-                        <action selector="cancelPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="r08-7z-9yY"/>
-                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jQi-ow-y1d">
                     <rect key="frame" x="162.5" y="20" width="50" height="50"/>
@@ -38,24 +35,21 @@
                         <constraint firstAttribute="width" constant="50" id="sTa-VQ-4dO"/>
                     </constraints>
                     <state key="normal" image="Button_Up"/>
-                    <connections>
-                        <action selector="upPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="K7I-aj-Dsx"/>
-                    </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5f-Hj-saR">
-                    <rect key="frame" x="20" y="78" width="335" height="38.5"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5f-Hj-saR">
+                    <rect key="frame" x="20" y="78" width="335" height="31"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="26"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date | Center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ig0-wp-RVe">
-                    <rect key="frame" x="20" y="116.5" width="335" height="20.5"/>
+                    <rect key="frame" x="20" y="117" width="335" height="20.5"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Description" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uic-zl-BhC">
-                    <rect key="frame" x="0.0" y="157" width="375" height="510"/>
+                    <rect key="frame" x="0.0" y="157.5" width="375" height="509.5"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -69,7 +63,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="a5f-Hj-saR" secondAttribute="trailing" constant="20" id="2gs-Ux-Vgs"/>
                 <constraint firstItem="uic-zl-BhC" firstAttribute="top" secondItem="Ig0-wp-RVe" secondAttribute="bottom" constant="20" id="4Ix-7y-VUr"/>
                 <constraint firstItem="wQP-FZ-M3r" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8GX-PL-6hf"/>
-                <constraint firstItem="Ig0-wp-RVe" firstAttribute="top" secondItem="a5f-Hj-saR" secondAttribute="bottom" id="N63-99-fDf"/>
+                <constraint firstItem="Ig0-wp-RVe" firstAttribute="top" secondItem="a5f-Hj-saR" secondAttribute="bottom" constant="8" id="N63-99-fDf"/>
                 <constraint firstItem="a5f-Hj-saR" firstAttribute="top" secondItem="vvJ-uJ-8RZ" secondAttribute="bottom" constant="8" id="NhO-dR-pQ9"/>
                 <constraint firstItem="uic-zl-BhC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="PrV-Tg-G05"/>
                 <constraint firstItem="a5f-Hj-saR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="TSq-ST-fgM"/>
@@ -85,10 +79,12 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="cancelButton" destination="vvJ-uJ-8RZ" id="QOB-eW-oTk"/>
                 <outlet property="descriptionTextView" destination="uic-zl-BhC" id="0Sj-Mb-ECL"/>
                 <outlet property="headerView" destination="wQP-FZ-M3r" id="F9p-S9-hpd"/>
                 <outlet property="subtitleLabel" destination="Ig0-wp-RVe" id="5Ob-sD-c6S"/>
                 <outlet property="titleLabel" destination="a5f-Hj-saR" id="aMG-i5-ySv"/>
+                <outlet property="upButton" destination="jQi-ow-y1d" id="bGP-yf-BQC"/>
             </connections>
             <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
         </view>

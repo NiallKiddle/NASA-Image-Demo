@@ -29,6 +29,7 @@
 		45BB768F223E7A9000890CD0 /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BB768E223E7A9000890CD0 /* CollectionModel.swift */; };
 		45BB7691223E7A9900890CD0 /* LinksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BB7690223E7A9900890CD0 /* LinksModel.swift */; };
 		45BB7693223E7AF700890CD0 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BB7692223E7AF700890CD0 /* DataModel.swift */; };
+		45DA4FED2241979D00D722A2 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DA4FEC2241979D00D722A2 /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		45BB768E223E7A9000890CD0 /* CollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
 		45BB7690223E7A9900890CD0 /* LinksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinksModel.swift; sourceTree = "<group>"; };
 		45BB7692223E7AF700890CD0 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		45DA4FEC2241979D00D722A2 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		454D4069223CEC8D00869A97 /* Milky Way demo */ = {
 			isa = PBXGroup;
 			children = (
+				45DA4FEB224196E900D722A2 /* Helpers */,
 				45876E8E223CFFEA00FF58AE /* Cells */,
 				45876E8B223CFD7D00FF58AE /* View Controllers */,
 				45876E8C223CFD8E00FF58AE /* Network */,
@@ -224,6 +227,14 @@
 				45BB7686223E3A0F00890CD0 /* TextView.xib */,
 			);
 			path = "Text view";
+			sourceTree = "<group>";
+		};
+		45DA4FEB224196E900D722A2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				45DA4FEC2241979D00D722A2 /* StringExtension.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,6 +380,7 @@
 				454D406D223CEC8D00869A97 /* HomeViewController.swift in Sources */,
 				45BB768F223E7A9000890CD0 /* CollectionModel.swift in Sources */,
 				45BB768B223E661300890CD0 /* ItemModel.swift in Sources */,
+				45DA4FED2241979D00D722A2 /* StringExtension.swift in Sources */,
 				45BB768D223E788600890CD0 /* ResponseModel.swift in Sources */,
 				45BB7685223E3A0300890CD0 /* TextView.swift in Sources */,
 				45BB767C223E38C100890CD0 /* ImageViewController.swift in Sources */,

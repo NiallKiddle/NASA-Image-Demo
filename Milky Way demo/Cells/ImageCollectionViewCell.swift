@@ -51,10 +51,10 @@ extension ImageCollectionViewCell {
         // Title label
         titleLabel.text = data.title!
         
-        // Data and center label
+        // Subtitle label with date and center
         let date = data.date_created!
         let center = data.center!
-        subtitleLabel.text = "\(center) | \(date)"
+        subtitleLabel.text = "\(center) | \(date.formattedDateString())"
         
         // Cell image
         network.loadImageUsing(urlString: links.href!) { (image) in
