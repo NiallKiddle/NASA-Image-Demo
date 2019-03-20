@@ -12,6 +12,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
     
     // Cell attributes
     @IBOutlet weak var imageView: UIImageView!
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     
@@ -19,7 +20,21 @@ class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    private let network = NetworkController()
+    // Model
+    var data: DataModel! {
+        didSet {
+            // Reset indicator and loading view
+            if imageView.image == nil { cellImage(hasLoaded: false) }
+            
+            // Title label
+            titleLabel.text = data.title!
+            
+            // Subtitle label with date and center
+            let date = data.date_created!
+            let center = data.center!
+            subtitleLabel.text = "\(center) | \(date.formattedDateString())"
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

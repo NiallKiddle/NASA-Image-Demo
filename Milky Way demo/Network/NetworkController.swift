@@ -11,6 +11,7 @@ import UIKit
 
 class NetworkController {
     
+    static let shared = NetworkController()
     public let endpoint = "https://images-api.nasa.gov/search?q=milky%20way&media_type=image&year_start=2017&year_end=2017"
     
     private let imageCache = NSCache<NSString, UIImage>()// Temporarily store images during session
@@ -25,7 +26,7 @@ class NetworkController {
                 completionHandler(nil)
                 return
             }
-            
+
             // Decode JSON response
             completionHandler(self.decodeJSONFrom(data!))
         }
@@ -45,8 +46,6 @@ class NetworkController {
         }
         
         fetchData(from: url!) { (data) in
-            guard data != nil else { return }
-            
             let imageToCache = UIImage(data: data!)
             
             // Ensure returning correct image
