@@ -92,8 +92,37 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-        cell.imageView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
-        cell.configureCell(for: objectArray[indexPath.item])
+        
+        // Prepare object
+        let object = objectArray[indexPath.item]
+        guard let data = object.data?[0] else { return cell }
+        
+        // Reset indicator and loading view
+        if cell.imageView.image == nil { cell.cellImage(hasLoaded: false) }
+        
+        // Title label
+        cell.titleLabel.text = data.title!
+        
+        // Subtitle label with date and center
+        let date = data.date_created!
+        let center = data.center!
+       cell.subtitleLabel.text = "\(center) | \(date.formattedDateString())"
+        
+        // Cell image
+        guard let links = object.links?[0] else { return cell }
+        
+        network.loadImageUsing(urlString: links.href!) { (image) in
+            guard image != nil else { return }
+            
+            // Switch onto main thread for UI Change
+            DispatchQueue.main.async {
+                if let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell {
+                    cell.imageView.image = image
+                    cell.cellImage(hasLoaded: true)
+                }
+            }
+        }
+        
         return cell
     }
     
