@@ -4,7 +4,7 @@ Demo project using the NASA Search API
 
 # Description
 
-This project uses the NASA Image Search API to fetch images related to 'The Milky Way' structured using the MVC design pattern. It demonstrates caching and asynchronous loading of images without the use of any third party frameworks or libraries.
+This project uses the NASA Image Search API to fetch images related to 'The Milky Way' structured using the MVC design pattern. It demonstrates caching and asynchronous loading of images from a JSON response, without the use of any third party frameworks or libraries.
 
 # Building the project
 
@@ -19,8 +19,7 @@ Simply hit build and run!
 3. `URLSession` performs a high level operation using `dataTask` which is contained within the `NetworkController.swift`.
 4. The API returns a JSON response which is decoded into separate structs each detailed in `JSON objects` using the `Codable` protocol with `JSONDecoder`. These custom models are constructed by the controller and completion handlers in the `HomeViewController.swift` class allows it to be received and displayed.
 5. If the image has not been downloaded previously, the image data is fecthed in the `NetworkController.swift` where it is then cached using `NSCache<NSString, UIImage>()`.
-6. The HTTP request is asynchronous and gets fired via `cellForItemAt` to ensure that only the necessary images are downloaded at a time.
-
+6. I went with using an MVC design pattern, due to the fact that it allows for multiple developers to work independant of each other on seperate parts of the project if it were to require multiple people working on it at one time. I also felt that using 
 # Short comings
 
 1. Currently any API request is sent via the fixed endpoint, I would have liked to have made the http request more extensive by manipulating the api paramters to allow the date range to be changed with some form of interface.
