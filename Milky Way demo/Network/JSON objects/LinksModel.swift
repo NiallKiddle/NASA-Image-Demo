@@ -13,4 +13,10 @@ struct LinksModel: Decodable {
     let render: String?
     let rel: String?
     let href: String?
+    
+    init(render: String, rel: String, href: String) {
+        self.render = render
+        self.rel = rel
+        self.href = href
+    }
 }
