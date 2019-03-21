@@ -106,17 +106,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         // Assign data to model
         cell.data = data
-        
-        // Cell image
-        NetworkController().loadImageUsing(urlString: urlString) { (image) in
-            guard let image = image else { return }
-            
-            // Switch onto main thread for UI Change
-            DispatchQueue.main.async {
-                cell.imageView.image = image
-                cell.cellImage(hasLoaded: true)
-            }
-        }
+        cell.loadImage(with: urlString)
         
         return cell
     }

@@ -14,7 +14,7 @@ class NetworkController {
     static let shared = NetworkController()
     public let endpoint = "https://images-api.nasa.gov/search?q=milky%20way&media_type=image&year_start=2017&year_end=2017"
     
-    private let imageCache = NSCache<NSString, UIImage>()// Temporarily store images during session
+    private let imageCache = NSCache<NSString, UIImage>() // Temporarily store images during session
     private var imageUrlString: String? // used to ensure cell loads correct image
     
     // MARK: - Public functions
