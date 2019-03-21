@@ -11,6 +11,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var dataLabel: UILabel!
     
     private var selectedData: DataModel!
     private var selectedImage: UIImage!
@@ -18,8 +19,8 @@ class HomeViewController: UIViewController {
     // Views
     private let headerView = HeaderView.instanceFromNib()
     
-    // Private properties
-    private var itemArray: [ItemModel] = []
+    // Properties
+    var itemArray: [ItemModel] = []
     private var savedArray: [ItemModel] = [] // Stores items from itemArray for when removing search filter
     private let numberOfCellsPerRow: CGFloat = 1
     private let endPoint = ""
@@ -29,7 +30,7 @@ class HomeViewController: UIViewController {
         
         layoutViews()
         setupCollectionView()
-        fetchImages()
+        fetchJSON()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,6 +43,12 @@ class HomeViewController: UIViewController {
             destination.objectData = selectedData
             destination.objectImage = selectedImage
         }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        NetworkController.shared.clearCache()
     }
 }
 
@@ -92,19 +99,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
         
-        // Prepare object
+        // Prepare data
         let object = itemArray[indexPath.item]
         guard let data = object.data?[0] else { return cell }
+        guard let link = object.links?[0], let urlString = link.href else { return cell }
         
         // Assign data to model
         cell.data = data
         
-        // URL for image
-        guard let links = object.links?[0] else { return cell }
-        let urlString = links.href!
-        
-        NetworkController.shared.loadImageUsing(urlString: urlString) { (image) in
-            guard image != nil else { return }
+        // Cell image
+        NetworkController().loadImageUsing(urlString: urlString) { (image) in
+            guard let image = image else { return }
             
             // Switch onto main thread for UI Change
             DispatchQueue.main.async {
@@ -213,29 +218,35 @@ extension HomeViewController: HeaderViewDelegate {
 // MARK: - API fetch
 private extension HomeViewController {
     
-    func fetchImages()
+    func fetchJSON()
     {
         guard let url = URL(string: NetworkController.shared.endpoint) else { return }
         
+        // Update
         headerView.dataLabel.text = "Fetching images"
+        dataLabel.text = "Loading..."
+        dataLabel.alpha = 1
         
         // Make call to API
         NetworkController.shared.fetchObjects(from: url) { (objects) in
-            guard objects != nil else {
+            guard let objects = objects else {
                 
-                // Use main thread for UI Change
                 DispatchQueue.main.async {
-                    self.headerView.dataLabel.text = "Error fetching images"
+                    self.headerView.dataLabel.text = "Error"
+                    self.dataLabel.text = "Could not load images from API"
                 }
                 
                 return
             }
             
-            self.itemArray = objects!
+            self.itemArray = objects
             self.savedArray = self.itemArray
             
             DispatchQueue.main.async {
                 self.headerView.dataLabel.text = "Showing \(self.savedArray.count) results"
+                self.dataLabel.text = ""
+                self.dataLabel.alpha = 0
+                
                 self.collectionView.reloadData()
             }
         }

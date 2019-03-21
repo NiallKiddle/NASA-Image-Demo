@@ -84,10 +84,10 @@ extension HeaderView: UITextFieldDelegate {
     
     @IBAction func textFieldDidChange(_ sender: UITextField)
     {
-        guard sender.text != nil else { return }
+        guard let text = sender.text else { return }
         guard delegate != nil else { return }
         
         // Update search every character change
-        delegate.searchDidUpdate(with: sender.text!)
+        delegate.searchDidUpdate(with: text)
     }
 }
