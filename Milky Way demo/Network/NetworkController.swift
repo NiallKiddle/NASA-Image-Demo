@@ -11,23 +11,29 @@ import UIKit
 
 class NetworkController {
     
+    static let shared = NetworkController()
     public let endpoint = "https://images-api.nasa.gov/search?q=milky%20way&media_type=image&year_start=2017&year_end=2017"
     
-    private let imageCache = NSCache<NSString, UIImage>()// Temporarily store images during session
+    private let imageCache = NSCache<NSString, UIImage>() // Temporarily store images during session
     private var imageUrlString: String? // used to ensure cell loads correct image
     
     // MARK: - Public functions
+    public func clearCache()
+    {
+        imageCache.removeAllObjects()
+    }
+    
     public func fetchObjects(from url: URL, completionHandler: @escaping ([ItemModel]?) ->())
     {
         // Fetch data from API endpoint
         fetchData(from: url) { (data) in
-            guard data != nil else {
+            guard let data = data else {
                 completionHandler(nil)
                 return
             }
-            
+
             // Decode JSON response
-            completionHandler(self.decodeJSONFrom(data!))
+            completionHandler(self.decodeJSONFrom(data))
         }
     }
     
@@ -45,9 +51,8 @@ class NetworkController {
         }
         
         fetchData(from: url!) { (data) in
-            guard data != nil else { return }
-            
-            let imageToCache = UIImage(data: data!)
+            guard let data = data else { return }
+            let imageToCache = UIImage(data: data)
             
             // Ensure returning correct image
             if self.imageUrlString == urlString {
@@ -55,6 +60,7 @@ class NetworkController {
             }
             
             self.imageCache.setObject(imageToCache!, forKey: urlString as NSString)
+            
             return
         }
     }
@@ -76,9 +82,9 @@ class NetworkController {
     {
         do {
             let responseData = try JSONDecoder().decode(ResponseModel.self, from: data)
-            guard responseData.collection != nil else { return nil }
+            guard let collection = responseData.collection else { return nil }
             
-            return responseData.collection!.items
+            return collection.items
         } catch let JSONErr {
             print("JSON Error: ", JSONErr)
             return nil

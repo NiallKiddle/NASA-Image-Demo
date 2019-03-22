@@ -18,6 +18,8 @@ class ImageView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        accessibilityIdentifier = "imageView"
     }
     
     class func instanceFromNib() -> ImageView {

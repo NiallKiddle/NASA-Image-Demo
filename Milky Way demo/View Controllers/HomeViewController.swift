@@ -11,8 +11,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    private let network = NetworkController()
+    @IBOutlet weak var dataLabel: UILabel!
     
     private var selectedData: DataModel!
     private var selectedImage: UIImage!
@@ -20,18 +19,20 @@ class HomeViewController: UIViewController {
     // Views
     private let headerView = HeaderView.instanceFromNib()
     
-    // Private properties
-    private var objectArray: [ItemModel] = []
-    private var savedArray: [ItemModel] = [] // Stores items from objectArray for when removing search filter
+    // Properties
+    var itemArray: [ItemModel] = []
+    private var savedArray: [ItemModel] = [] // Stores items from itemArray for when removing search filter
     private let numberOfCellsPerRow: CGFloat = 1
     private let endPoint = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.accessibilityIdentifier = "homeView"
+        
         layoutViews()
         setupCollectionView()
-        fetchImages()
+        fetchJSON()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -45,6 +46,13 @@ class HomeViewController: UIViewController {
             destination.objectImage = selectedImage
         }
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        // Prevent potential memory leaks with image cache
+        NetworkController.shared.clearCache()
+    }
 }
 
 // MARK: - Private Functions
@@ -55,6 +63,7 @@ private extension HomeViewController {
         // Header layout
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.openHeight)
         headerView.delegate = self
+        headerView.accessibilityIdentifier = "headerView"
         view.addSubview(headerView)
         
         // UICollectionView layout
@@ -64,10 +73,12 @@ private extension HomeViewController {
     func setupCollectionView()
     {
         let imageNib = UINib(nibName: "ImageCollectionViewCell", bundle: nil)
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(imageNib, forCellWithReuseIdentifier: "imageCollectionViewCell")
         collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        collectionView.accessibilityIdentifier = "collectionView"
         
         // Dismiss keyboard when scroll
         collectionView.keyboardDismissMode = .onDrag
@@ -87,49 +98,31 @@ private extension HomeViewController {
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return objectArray.count
+        return itemArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
         
-        // Prepare object
-        let object = objectArray[indexPath.item]
+        // Prepare data
+        let object = itemArray[indexPath.item]
         guard let data = object.data?[0] else { return cell }
+        guard let link = object.links?[0], let urlString = link.href else { return cell }
         
-        // Reset indicator and loading view
-        if cell.imageView.image == nil { cell.cellImage(hasLoaded: false) }
-        
-        // Title label
-        cell.titleLabel.text = data.title!
-        
-        // Subtitle label with date and center
-        let date = data.date_created!
-        let center = data.center!
-       cell.subtitleLabel.text = "\(center) | \(date.formattedDateString())"
-        
-        // Cell image
-        guard let links = object.links?[0] else { return cell }
-        
-        network.loadImageUsing(urlString: links.href!) { (image) in
-            guard image != nil else { return }
-            
-            // Switch onto main thread for UI Change
-            DispatchQueue.main.async {
-                if let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell {
-                    cell.imageView.image = image
-                    cell.cellImage(hasLoaded: true)
-                }
-            }
-        }
+        // Assign data to model
+        cell.data = data
+        cell.loadImage(with: urlString)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let object = objectArray[indexPath.item]
+        let object = itemArray[indexPath.item]
         guard let data = object.data?.first! else { return }
         guard let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell else { return }
+        
+        // Check if the image had loaded
+        if cell.imageView.image == nil { return }
         
         selectedData = data
         selectedImage = cell.imageView.image
@@ -195,7 +188,7 @@ extension HomeViewController: HeaderViewDelegate {
     func searchDidUpdate(with text: String)
     {
         // Return items to original array
-        objectArray = savedArray
+        itemArray = savedArray
         
         guard text != "" else {
             collectionView.reloadData()
@@ -205,14 +198,14 @@ extension HomeViewController: HeaderViewDelegate {
         }
         
         // Filter for search term
-        let filtered = objectArray.filter {
+        let filtered = itemArray.filter {
             $0.data!.first!.title!.localizedLowercase.contains(text.localizedLowercase)
         }
         
-        objectArray = filtered
+        itemArray = filtered
         collectionView.reloadData()
         
-        let filteredCount = objectArray.count
+        let filteredCount = itemArray.count
         headerView.dataLabel.text = filteredCount == 0 ? "No results found for '\(text)'" : "Showing \(filteredCount) results for '\(text)'"
     }
 }
@@ -220,29 +213,35 @@ extension HomeViewController: HeaderViewDelegate {
 // MARK: - API fetch
 private extension HomeViewController {
     
-    func fetchImages()
+    func fetchJSON()
     {
-        guard let url = URL(string: network.endpoint) else { return }
+        guard let url = URL(string: NetworkController.shared.endpoint) else { return }
         
+        // Update
         headerView.dataLabel.text = "Fetching images"
+        dataLabel.text = "Loading..."
+        dataLabel.alpha = 1
         
         // Make call to API
-        network.fetchObjects(from: url) { (objects) in
-            guard objects != nil else {
+        NetworkController.shared.fetchObjects(from: url) { (objects) in
+            guard let objects = objects else {
                 
-                // Use main thread for UI Change
                 DispatchQueue.main.async {
-                    self.headerView.dataLabel.text = "Error fetching images"
+                    self.headerView.dataLabel.text = "Error"
+                    self.dataLabel.text = "Could not load images from API"
                 }
                 
                 return
             }
             
-            self.objectArray = objects!
-            self.savedArray = self.objectArray
+            self.itemArray = objects
+            self.savedArray = self.itemArray
             
             DispatchQueue.main.async {
                 self.headerView.dataLabel.text = "Showing \(self.savedArray.count) results"
+                self.dataLabel.text = ""
+                self.dataLabel.alpha = 0
+                
                 self.collectionView.reloadData()
             }
         }

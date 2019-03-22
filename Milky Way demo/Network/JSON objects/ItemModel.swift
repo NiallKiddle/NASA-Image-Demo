@@ -13,4 +13,10 @@ struct ItemModel: Decodable {
     let href: String?
     let data: [DataModel]?
     let links: [LinksModel]?
+    
+    init(href: String, data: [DataModel], links: [LinksModel]) {
+        self.href = href
+        self.data = data
+        self.links = links
+    }
 }

@@ -20,6 +20,8 @@ class TextView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        accessibilityIdentifier = "textView"
+        
         headerShadow()
     }
     

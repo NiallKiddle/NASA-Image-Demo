@@ -18,4 +18,15 @@ struct DataModel: Decodable {
     let media_type: String?
     let keywords: [String]?
     let nasa_id: String?
+    
+    init(title: String, date_created: String, center: String, description: String, location: String, media_type: String, keywords: [String], nasa_id: String) {
+        self.title = title
+        self.date_created = date_created
+        self.center = center
+        self.description = description
+        self.location = location
+        self.media_type = media_type
+        self.keywords = keywords
+        self.nasa_id = nasa_id
+    }
 }

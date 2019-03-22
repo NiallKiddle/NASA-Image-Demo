@@ -12,19 +12,36 @@ class ImageCollectionViewCell: UICollectionViewCell {
     
     // Cell attributes
     @IBOutlet weak var imageView: UIImageView!
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     
     // Loading attributes
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     private let network = NetworkController()
+    
+    // Model
+    var data: DataModel! {
+        didSet {
+            // Reset indicator and loading view
+            if imageView.image == nil { cellImage(hasLoaded: false) }
+            
+            // Title label
+            titleLabel.text = data.title!
+            
+            // Subtitle label with date and center
+            let date = data.date_created!
+            let center = data.center!
+            subtitleLabel.text = "\(center) | \(date.formattedDateString())"
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
         setupCell()
+        imageView.accessibilityIdentifier = "cellImage"
     }
     
     override func prepareForReuse() {
@@ -56,6 +73,18 @@ extension ImageCollectionViewCell {
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut, .allowUserInteraction], animations: {
             self.loadingView.alpha = 0
         })
+    }
+    
+    func loadImage(with urlString: String)
+    {
+        network.loadImageUsing(urlString: urlString) { (image) in
+            guard let image = image else { return }
+            
+            DispatchQueue.main.async {
+                self.imageView.image = image
+                self.cellImage(hasLoaded: true)
+            }
+        }
     }
 }
 

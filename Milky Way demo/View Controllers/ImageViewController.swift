@@ -27,6 +27,9 @@ class ImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.accessibilityIdentifier = "mainImageView"
+        scrollView.accessibilityIdentifier = "scrollView"
+        
         setupScrollView()
         setupViews()
     }
