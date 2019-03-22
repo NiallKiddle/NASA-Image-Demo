@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,7 +34,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZ4-YL-dER">
-                    <rect key="frame" x="0.0" y="20" width="50" height="50"/>
+                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="Bhp-Ia-mfb"/>
                         <constraint firstAttribute="height" constant="50" id="pys-Ef-BIT"/>
@@ -50,22 +50,22 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="MZ4-YL-dER" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="2Ef-Rr-ATC"/>
+                <constraint firstItem="MZ4-YL-dER" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2Ef-Rr-ATC"/>
                 <constraint firstItem="KYs-1E-4fe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2IL-PS-CdG"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="GSz-QB-Jfu" secondAttribute="bottom" constant="20" id="88w-SG-IoL"/>
+                <constraint firstAttribute="bottom" secondItem="GSz-QB-Jfu" secondAttribute="bottom" constant="20" id="88w-SG-IoL"/>
                 <constraint firstAttribute="bottom" secondItem="KYs-1E-4fe" secondAttribute="bottom" id="AZk-vZ-Fuh"/>
                 <constraint firstItem="KYs-1E-4fe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Cz7-h7-fwz"/>
                 <constraint firstAttribute="trailing" secondItem="KYs-1E-4fe" secondAttribute="trailing" id="HWp-wu-Heb"/>
                 <constraint firstItem="tAe-Pt-jKc" firstAttribute="trailing" secondItem="GSz-QB-Jfu" secondAttribute="trailing" constant="100" id="Rdk-3h-b0H"/>
                 <constraint firstItem="GSz-QB-Jfu" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="XCr-vm-0Mm"/>
-                <constraint firstItem="7f2-TX-9ZE" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Yds-NT-fQt"/>
+                <constraint firstItem="7f2-TX-9ZE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Yds-NT-fQt"/>
                 <constraint firstItem="GSz-QB-Jfu" firstAttribute="top" secondItem="tAe-Pt-jKc" secondAttribute="bottom" id="ZZ3-jN-y7l"/>
-                <constraint firstItem="MZ4-YL-dER" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="aRG-qS-J1W"/>
-                <constraint firstItem="tAe-Pt-jKc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="b4s-vh-gYE"/>
+                <constraint firstItem="MZ4-YL-dER" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aRG-qS-J1W"/>
+                <constraint firstItem="tAe-Pt-jKc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="b4s-vh-gYE"/>
                 <constraint firstItem="tAe-Pt-jKc" firstAttribute="top" secondItem="7f2-TX-9ZE" secondAttribute="bottom" constant="8" id="gK1-2G-Z67"/>
                 <constraint firstItem="7f2-TX-9ZE" firstAttribute="trailing" secondItem="tAe-Pt-jKc" secondAttribute="trailing" id="ure-BI-aaQ"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <viewLayoutGuide key="safeArea" id="nvx-20-BNl"/>
             <connections>
                 <outlet property="backgroundImageView" destination="KYs-1E-4fe" id="K8x-01-3yj"/>
                 <outlet property="cancelButton" destination="MZ4-YL-dER" id="chH-D0-MfM"/>

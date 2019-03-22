@@ -38,20 +38,22 @@ class ImageViewController: UIViewController {
 private extension ImageViewController {
     func setupScrollView()
     {
+        guard let window = UIApplication.shared.keyWindow else { return }
+        
         // Add vertical pages to scroll view
         pagesArray.append(imageView)
         pagesArray.append(textView)
         
         for (index, page) in pagesArray.enumerated()
         {
-            let yPosition: CGFloat = view.frame.height * CGFloat(index)
-            page.frame = CGRect(x: 0, y: yPosition, width: view.frame.width, height: view.frame.height)
+            let yPosition: CGFloat = window.frame.height * CGFloat(index)
+            page.frame = CGRect(x: 0, y: yPosition, width: scrollView.frame.width, height: scrollView.frame.height)
             
             scrollView.addSubview(page)
         }
         
         // Setup scroll view size for pages
-        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height * CGFloat(pagesArray.count))
+        scrollView.contentSize = CGSize(width: window.frame.width, height: window.frame.height * CGFloat(pagesArray.count))
     }
     
     func setupViews()
@@ -68,13 +70,6 @@ private extension ImageViewController {
         textView.configureView(for: objectData)
         textView.upButton.addTarget(self, action: #selector(textUpPressed(_:)), for: .touchUpInside)
         textView.cancelButton.addTarget(self, action: #selector(textCancelPressed(_:)), for: .touchUpInside)
-    }
-    
-    func resetPosition()
-    {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        })
     }
 }
 
