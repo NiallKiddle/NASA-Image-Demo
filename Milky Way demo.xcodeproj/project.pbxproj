@@ -12,8 +12,7 @@
 		454D4070223CEC8D00869A97 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 454D406E223CEC8D00869A97 /* Main.storyboard */; };
 		454D4072223CEC8F00869A97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 454D4071223CEC8F00869A97 /* Assets.xcassets */; };
 		454D4075223CEC8F00869A97 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 454D4073223CEC8F00869A97 /* LaunchScreen.storyboard */; };
-		454D4080223CEC8F00869A97 /* ControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D407F223CEC8F00869A97 /* ControllerTests.swift */; };
-		454D408B223CEC8F00869A97 /* Milky_Way_demoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D408A223CEC8F00869A97 /* Milky_Way_demoUITests.swift */; };
+		454D408B223CEC8F00869A97 /* ControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D408A223CEC8F00869A97 /* ControllerUITests.swift */; };
 		45714ECC2242FDD8007D6E8E /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BB768C223E788600890CD0 /* ResponseModel.swift */; };
 		45714ECD2242FDD8007D6E8E /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BB768E223E7A9000890CD0 /* CollectionModel.swift */; };
 		45714ECE2242FDD8007D6E8E /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BB768A223E661300890CD0 /* ItemModel.swift */; };
@@ -64,10 +63,9 @@
 		454D4074223CEC8F00869A97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		454D4076223CEC8F00869A97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		454D407B223CEC8F00869A97 /* Milky Way demoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Milky Way demoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		454D407F223CEC8F00869A97 /* ControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerTests.swift; sourceTree = "<group>"; };
 		454D4081223CEC8F00869A97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		454D4086223CEC8F00869A97 /* Milky Way demoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Milky Way demoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		454D408A223CEC8F00869A97 /* Milky_Way_demoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milky_Way_demoUITests.swift; sourceTree = "<group>"; };
+		454D408A223CEC8F00869A97 /* ControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerUITests.swift; sourceTree = "<group>"; };
 		454D408C223CEC8F00869A97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45714ED12242FF00007D6E8E /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		45876E90223D001A00FF58AE /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				45714ED12242FF00007D6E8E /* NetworkTests.swift */,
-				454D407F223CEC8F00869A97 /* ControllerTests.swift */,
 				454D4081223CEC8F00869A97 /* Info.plist */,
 			);
 			path = "Milky Way demoTests";
@@ -162,7 +159,7 @@
 		454D4089223CEC8F00869A97 /* Milky Way demoUITests */ = {
 			isa = PBXGroup;
 			children = (
-				454D408A223CEC8F00869A97 /* Milky_Way_demoUITests.swift */,
+				454D408A223CEC8F00869A97 /* ControllerUITests.swift */,
 				454D408C223CEC8F00869A97 /* Info.plist */,
 			);
 			path = "Milky Way demoUITests";
@@ -406,7 +403,6 @@
 				45714ECD2242FDD8007D6E8E /* CollectionModel.swift in Sources */,
 				45714ECC2242FDD8007D6E8E /* ResponseModel.swift in Sources */,
 				45714ED02242FDD8007D6E8E /* LinksModel.swift in Sources */,
-				454D4080223CEC8F00869A97 /* ControllerTests.swift in Sources */,
 				45714ECF2242FDD8007D6E8E /* DataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,7 +411,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				454D408B223CEC8F00869A97 /* Milky_Way_demoUITests.swift in Sources */,
+				454D408B223CEC8F00869A97 /* ControllerUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

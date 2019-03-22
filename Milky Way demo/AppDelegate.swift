@@ -16,6 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Reset state if running UITests
+        if CommandLine.arguments.contains("--uitesting")
+        {
+            resetState()
+        }
+        
         return true
     }
 
@@ -40,7 +47,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+}
 
-
+// MARK: - Private functions
+private extension AppDelegate {
+    
+    func resetState()
+    {
+        // This function demonstrates how I would usually
+        // clear or reset databases, NSUserDefaults
+        // or any other form of persistance
+    }
 }
 

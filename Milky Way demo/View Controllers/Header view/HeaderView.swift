@@ -63,6 +63,7 @@ private extension HeaderView {
         searchView.layer.cornerRadius = 12
         
         searchTextField.delegate = self
+        searchTextField.accessibilityIdentifier = "searchTextField"
         
         // Shadow
         layer.shadowColor = UIColor.black.cgColor

@@ -41,6 +41,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
         setupCell()
+        imageView.accessibilityIdentifier = "cellImage"
     }
     
     override func prepareForReuse() {

@@ -28,6 +28,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.accessibilityIdentifier = "homeView"
+        
         layoutViews()
         setupCollectionView()
         fetchJSON()
@@ -48,6 +50,7 @@ class HomeViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
+        // Prevent potential memory leaks with image cache
         NetworkController.shared.clearCache()
     }
 }
@@ -60,6 +63,7 @@ private extension HomeViewController {
         // Header layout
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.openHeight)
         headerView.delegate = self
+        headerView.accessibilityIdentifier = "headerView"
         view.addSubview(headerView)
         
         // UICollectionView layout
@@ -74,6 +78,7 @@ private extension HomeViewController {
         collectionView.dataSource = self
         collectionView.register(imageNib, forCellWithReuseIdentifier: "imageCollectionViewCell")
         collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        collectionView.accessibilityIdentifier = "collectionView"
         
         // Dismiss keyboard when scroll
         collectionView.keyboardDismissMode = .onDrag
